@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdint.h>
 
-#define TABLE_SIZE 30
+#define TABLE_SIZE 100
 
 int two_to_n(int n) {
     if (n == 0)
@@ -30,14 +30,14 @@ uint64_t factorial_rec(uint64_t n) {
 uint64_t factorial_dyn(uint64_t n) {
     static uint64_t result_table[TABLE_SIZE] = {0};
 
-    uint64_t lookup = result_table[n];
-    if (lookup != 0)
-        return lookup;
-
     if (n == 0) {
         result_table[0] = 1;
         return 1;
     }
+    
+    uint64_t lookup = result_table[n];
+    if (lookup != 0)
+        return lookup;
 
     uint64_t result = n * factorial_dyn(n - 1);
     result_table[n] = result;
@@ -72,9 +72,9 @@ int main() {
     printf("factorial rec of %llu: %llu\n", n, factorial_rec(n));
     printf("factorial_dyn of %llu: %llu\n", n, factorial_dyn(n));
 
-    benchmark_fn(factorial_iter, "iterative");
-    benchmark_fn(factorial_rec, "recursive");
-    benchmark_fn(factorial_dyn, "dynamic");
+    // benchmark_fn(factorial_iter, "iterative");
+    // benchmark_fn(factorial_rec, "recursive");
+    // benchmark_fn(factorial_dyn, "dynamic");
 
     return 0;
 }
