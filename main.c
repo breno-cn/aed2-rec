@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <sys/time.h>
+#include <time.h>
 #include <stdint.h>
 
 #define TABLE_SIZE 30
@@ -60,8 +60,8 @@ void benchmark_fn(fact_fn fn, char *name) {
         acc += end - start;
     }
 
-    float avg = (float) (acc / iterations) / CLOCKS_PER_SEC;
-    printf("A funcao fatorial %s levou em media %f segundos para calcular o fatorial de %llu\n", name, avg, n);
+    float avg = (float) acc / CLOCKS_PER_SEC;
+    printf("A funcao fatorial %s %d vezes levou %f segundos para calcular o fatorial de %llu\n", name, iterations, avg, n);
 }
 
 int main() {
